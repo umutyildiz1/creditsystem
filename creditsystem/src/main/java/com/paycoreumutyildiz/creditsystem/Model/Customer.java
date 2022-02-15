@@ -20,7 +20,7 @@ public class Customer {
     @Id
     @Column(name = "sid")
     @NotNull(message = "TC kimlik numarası boş olamaz!")
-    private long sid;
+    private Long sid;
 
     @Column(name = "customer_name")
     @NotBlank(message = "İsim boş olamaz!")
@@ -32,7 +32,7 @@ public class Customer {
 
     @Column(name = "salary")
     @NotNull(message = "Maaş bilgisi boş olamaz!")
-    private long salary;
+    private Long salary;
 
     @Column(name = "phone_number")
     @NotBlank(message = "Telefon numarası boş olamaz!")//unique ekle
