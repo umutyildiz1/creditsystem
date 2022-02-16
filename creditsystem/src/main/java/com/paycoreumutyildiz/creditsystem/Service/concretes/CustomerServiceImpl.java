@@ -1,6 +1,7 @@
 package com.paycoreumutyildiz.creditsystem.Service.concretes;
 
 import com.paycoreumutyildiz.creditsystem.Exceptions.NotFoundException;
+import com.paycoreumutyildiz.creditsystem.Exceptions.UniquePhoneNumberException;
 import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Repository.CustomerRepository;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
@@ -33,7 +34,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void addCustomer(Customer customer) {
-        customerRepository.save(customer);
+        try{
+            customerRepository.save(customer);
+        }catch (Exception exception){
+            throw new UniquePhoneNumberException(customer.getPhoneNumber());
+        }
+
     }
 
     @Override
@@ -46,6 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<Customer> customer = Optional.of(getCustomer(sid));
         if(customer.isPresent()){
             customerRepository.delete(customer.get());
+            return true;
         }
         return false;
     }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Table(name = "customer")
 @Data
@@ -34,8 +35,10 @@ public class Customer {
     @NotNull(message = "Maaş bilgisi boş olamaz!")
     private Long salary;
 
-    @Column(name = "phone_number")
-    @NotBlank(message = "Telefon numarası boş olamaz!")//unique ekle
+
+    @Column(name = "phone_number",unique = true)
+    @NotBlank(message = "Telefon numarası boş olamaz!")
+    @Pattern(regexp="(^$|[0-9]{11})",message = "Telefon numarası sayılardan ve 11 karakterden oluşmalıdır!")
     private String phoneNumber;
 
     @Column(name = "credit_score")
