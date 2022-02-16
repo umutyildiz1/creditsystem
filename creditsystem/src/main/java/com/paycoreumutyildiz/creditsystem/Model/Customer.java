@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -35,7 +32,6 @@ public class Customer {
     @NotNull(message = "Maaş bilgisi boş olamaz!")
     private Long salary;
 
-
     @Column(name = "phone_number",unique = true)
     @NotBlank(message = "Telefon numarası boş olamaz!")
     @Pattern(regexp="(^$|[0-9]{11})",message = "Telefon numarası sayılardan ve 11 karakterden oluşmalıdır!")
@@ -44,4 +40,9 @@ public class Customer {
     @Column(name = "credit_score")
     @NotNull(message = "İsim boş olamaz!")
     private Integer creditScore;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @PrimaryKeyJoinColumn
+    private Credit credit;
+
 }
