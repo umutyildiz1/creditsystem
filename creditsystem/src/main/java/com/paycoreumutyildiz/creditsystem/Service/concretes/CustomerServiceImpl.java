@@ -2,8 +2,10 @@ package com.paycoreumutyildiz.creditsystem.Service.concretes;
 
 import com.paycoreumutyildiz.creditsystem.Exceptions.NotFoundException;
 import com.paycoreumutyildiz.creditsystem.Exceptions.UniquePhoneNumberException;
+import com.paycoreumutyildiz.creditsystem.Model.Credit;
 import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Repository.CustomerRepository;
+import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CreditService creditService;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, CreditService creditService) {
         this.customerRepository = customerRepository;
+        this.creditService = creditService;
     }
 
     @Override
@@ -47,10 +51,19 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.save(customer);
     }
 
-    @Override
+    @Override //Delete Customer with Credit
     public boolean deleteCustomer(Long sid) {
         Optional<Customer> customer = Optional.of(getCustomer(sid));
         if(customer.isPresent()){
+            Optional<Credit> credit;
+            try{
+                 credit= Optional.of(creditService.getCredit(sid));
+                if(credit.isPresent()){
+                    creditService.deleteCredit(sid);
+                }
+            }catch(NotFoundException e){//log
+                 }
+
             customerRepository.delete(customer.get());
             return true;
         }

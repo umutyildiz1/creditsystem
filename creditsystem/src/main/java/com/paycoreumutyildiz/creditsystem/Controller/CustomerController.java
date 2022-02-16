@@ -41,7 +41,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("delete")
-    public boolean deleteBook(@RequestParam @Min(1) Long sid){
+    public boolean deleteCustomer(@RequestParam @Min(1) Long sid){
         return customerService.deleteCustomer(sid);
     }
 }
