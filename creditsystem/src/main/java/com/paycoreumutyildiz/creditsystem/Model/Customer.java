@@ -1,5 +1,6 @@
 package com.paycoreumutyildiz.creditsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,8 +38,8 @@ public class Customer {
     @Pattern(regexp="(^$|[0-9]{11})",message = "Telefon numarası sayılardan ve 11 karakterden oluşmalıdır!")
     private String phoneNumber;
 
+
     @Column(name = "credit_score")
-    @NotNull(message = "İsim boş olamaz!")
     private Integer creditScore;
 
     @OneToOne(cascade = CascadeType.REMOVE)
