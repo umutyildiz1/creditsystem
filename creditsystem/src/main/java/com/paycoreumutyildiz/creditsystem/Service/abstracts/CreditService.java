@@ -4,6 +4,7 @@ import com.paycoreumutyildiz.creditsystem.Model.Credit;
 import com.paycoreumutyildiz.creditsystem.Model.Customer;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface CreditService {
@@ -13,4 +14,5 @@ public interface CreditService {
     void addCredit(Credit credit);
     Credit updateCredit(Credit credit);
     boolean deleteCredit(Long sid);
+
 }

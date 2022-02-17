@@ -2,12 +2,16 @@ package com.paycoreumutyildiz.creditsystem.Service.concretes;
 
 import com.paycoreumutyildiz.creditsystem.Exceptions.NotFoundException;
 import com.paycoreumutyildiz.creditsystem.Model.Credit;
+import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Repository.CreditRepository;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
+import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -55,4 +59,7 @@ public class CreditServiceImpl implements CreditService {
         }
         return false;
     }
+
+
+
 }

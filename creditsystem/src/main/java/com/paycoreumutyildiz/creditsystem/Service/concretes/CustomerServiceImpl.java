@@ -11,9 +11,7 @@ import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -22,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CreditService creditService;
     private final CreditScoreService creditScoreService;
 
-    private final Integer UPPER_BOUND = 3;
+
 
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository, CreditService creditService, CreditScoreService creditScoreService) {
@@ -58,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.save(customer);
     }
 
-    @Override //Delete Customer with Credit
+    @Override //Delete Customer with Credit if exists
     public boolean deleteCustomer(Long sid) {
         Optional<Customer> customer = Optional.of(getCustomer(sid));
         if(customer.isPresent()){
@@ -75,5 +73,38 @@ public class CustomerServiceImpl implements CustomerService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Map<String ,String> queryCredit(Long sid){//loglarda info sms bilgisi
+        Customer customer = getCustomer(sid);
+        Long customerSalary = customer.getSalary();
+        Integer customerCreditScore = customer.getCreditScore();
+        Map<String, String> creditInfoMap = new HashMap<>();
+        final Integer CREDIT_LIMIT_MULTIPLIER = 4;
+
+        if (customerCreditScore < 500){
+            creditService.addCredit(new Credit(sid,false,0));
+            creditInfoMap.put("message","RED");
+            creditInfoMap.put("creditLimit","0");
+            return creditInfoMap;
+        }else if (customerCreditScore >= 500 && customerCreditScore < 1000 && customerSalary < 5000){
+            creditService.addCredit(new Credit(sid,true,10000));
+            creditInfoMap.put("message","ONAY");
+            creditInfoMap.put("creditLimit","10000");
+            return creditInfoMap;
+        }else if (customerCreditScore >= 500 && customerCreditScore < 1000 && customerSalary >= 5000){
+            creditService.addCredit(new Credit(sid,true,20000));
+            creditInfoMap.put("message","ONAY");
+            creditInfoMap.put("creditLimit","20000");
+            return creditInfoMap;
+        }else if (customerCreditScore >= 1000){
+            Integer creditLimit = (int) (customerSalary * CREDIT_LIMIT_MULTIPLIER);
+            creditService.addCredit(new Credit(sid,true, creditLimit));
+            creditInfoMap.put("message", "ONAY");
+            creditInfoMap.put("creditLimit", "" + creditLimit);
+            return creditInfoMap;
+        }
+        return creditInfoMap;
     }
 }
