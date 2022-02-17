@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/customer/")
@@ -43,5 +44,10 @@ public class CustomerController {
     @DeleteMapping("delete")
     public boolean deleteCustomer(@RequestParam @Min(1) Long sid){
         return customerService.deleteCustomer(sid);
+    }
+
+    @GetMapping("query")
+    public Map<String,String> queryCredit(@RequestParam @Min(1) Long sid){
+        return customerService.queryCredit(sid);
     }
 }
