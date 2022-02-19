@@ -4,6 +4,7 @@ import com.paycoreumutyildiz.creditsystem.Model.Credit;
 import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,13 +24,13 @@ public class CreditController {
     }
 
     @GetMapping("all")
-    public List<Credit> getAllCredits(){
-        return creditService.getAllCredits();
+    public ResponseEntity<List<Credit>> getAllCredits(){
+        return ResponseEntity.ok(creditService.getAllCredits());
     }
 
     @GetMapping("{sid}")
-    public Credit getCredit(@PathVariable @Min(1) Long sid){
-        return creditService.getCredit(sid);
+    public ResponseEntity<Credit> getCredit(@PathVariable @Min(1) Long sid){
+        return ResponseEntity.ok(creditService.getCredit(sid));
     }
 
     @PostMapping("create")
@@ -38,17 +39,17 @@ public class CreditController {
     }
 
     @PutMapping("update")
-    public Credit updateCredit(@RequestBody Credit credit){
-        return creditService.updateCredit(credit);
+    public ResponseEntity<Credit> updateCredit(@RequestBody Credit credit){
+        return ResponseEntity.ok(creditService.updateCredit(credit));
     }
 
     @DeleteMapping("delete")
-    public boolean deleteCredit(@RequestParam @Min(1) Long sid){
-        return creditService.deleteCredit(sid);
+    public ResponseEntity<Boolean> deleteCredit(@RequestParam @Min(1) Long sid){
+        return ResponseEntity.ok(creditService.deleteCredit(sid));
     }
 
     @GetMapping("query")
-    public Map<String,String> queryCredit(@RequestParam @Min(1) Long sid){
-        return creditService.queryCredit(sid);
+    public ResponseEntity<Map<String,String>> queryCredit(@RequestParam @Min(1) Long sid){
+        return ResponseEntity.ok(creditService.queryCredit(sid));
     }
 }
