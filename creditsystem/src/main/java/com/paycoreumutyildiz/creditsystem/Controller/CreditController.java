@@ -47,5 +47,8 @@ public class CreditController {
         return creditService.deleteCredit(sid);
     }
 
-
+    @GetMapping("query")
+    public Map<String,String> queryCredit(@RequestParam @Min(1) Long sid){
+        return creditService.queryCredit(sid);
+    }
 }

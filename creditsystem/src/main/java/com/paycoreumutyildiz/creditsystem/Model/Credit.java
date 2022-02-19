@@ -20,7 +20,7 @@ public class Credit {
     private Long sid;
 
     @Column(name = "credit_result")
-    private Boolean creditResult;
+    private String creditResult;
 
     @Column(name = "credit_limit")
     private Integer creditLimit;

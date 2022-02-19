@@ -46,8 +46,5 @@ public class CustomerController {
         return customerService.deleteCustomer(sid);
     }
 
-    @GetMapping("query")
-    public Map<String,String> queryCredit(@RequestParam @Min(1) Long sid){
-        return customerService.queryCredit(sid);
-    }
+
 }

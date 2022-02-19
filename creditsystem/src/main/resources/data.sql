@@ -14,7 +14,7 @@ CREATE TABLE Customer(
 
 CREATE TABLE Credit(
     sid BIGINT PRIMARY KEY,
-    credit_result boolean,
+    credit_result VARCHAR(50),
     credit_limit INT
 );
 

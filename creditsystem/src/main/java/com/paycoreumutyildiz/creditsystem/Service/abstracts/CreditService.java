@@ -14,5 +14,6 @@ public interface CreditService {
     void addCredit(Credit credit);
     Credit updateCredit(Credit credit);
     boolean deleteCredit(Long sid);
+    Map<String,String> queryCredit(Long sid);
 
 }
