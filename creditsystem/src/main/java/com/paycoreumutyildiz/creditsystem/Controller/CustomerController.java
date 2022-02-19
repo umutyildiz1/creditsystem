@@ -3,6 +3,7 @@ package com.paycoreumutyildiz.creditsystem.Controller;
 import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,13 +23,13 @@ public class CustomerController {
     }
 
     @GetMapping("all")
-    public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomers();
+    public ResponseEntity<List<Customer>> getAllCustomers(){
+        return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
     @GetMapping("{sid}")
-    public Customer getCustomer(@PathVariable @Min(1) Long sid){
-        return customerService.getCustomer(sid);
+    public ResponseEntity<Customer> getCustomer(@PathVariable @Min(1) Long sid){
+        return ResponseEntity.ok(customerService.getCustomer(sid));
     }
 
     @PostMapping("create")
@@ -37,13 +38,13 @@ public class CustomerController {
     }
 
     @PutMapping("update")
-    public Customer updateCustomer(@RequestBody Customer customer){
-        return customerService.updateCustomer(customer);
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+        return ResponseEntity.ok(customerService.updateCustomer(customer));
     }
 
     @DeleteMapping("delete")
-    public boolean deleteCustomer(@RequestParam @Min(1) Long sid){
-        return customerService.deleteCustomer(sid);
+    public ResponseEntity<Boolean> deleteCustomer(@RequestParam @Min(1) Long sid){
+        return ResponseEntity.ok(customerService.deleteCustomer(sid));
     }
 
 
