@@ -12,5 +12,5 @@ public interface CustomerService {
     void addCustomer(Customer customer);
     Customer updateCustomer(Customer customer);
     boolean deleteCustomer(Long sid);
-    Map<String,String> queryCredit(Long sid);
+
 }
