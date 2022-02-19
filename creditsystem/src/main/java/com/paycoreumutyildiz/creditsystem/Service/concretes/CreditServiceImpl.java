@@ -8,6 +8,7 @@ import com.paycoreumutyildiz.creditsystem.Repository.CreditRepository;
 import com.paycoreumutyildiz.creditsystem.Repository.CustomerRepository;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class CreditServiceImpl implements CreditService {
 
     private final CreditRepository creditRepository;
@@ -44,6 +46,7 @@ public class CreditServiceImpl implements CreditService {
     public void addCredit(Credit credit) {
         try{
             creditRepository.save(credit);
+            log.info("Success adding Credit");
         }catch (Exception exception){
             throw new NotFoundException("Customer with sid:"+credit.getSid());
         }
@@ -52,12 +55,14 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit updateCredit(Credit credit) {
+        log.info("Success update");
         return creditRepository.save(credit);
     }
 
     @Override
     public boolean deleteCredit(Long sid) {
         Optional<Credit> credit = Optional.of(getCredit(sid));
+        log.info(credit.get().toString());
         if(credit.isPresent()){
             creditRepository.delete(credit.get());
             return true;
@@ -70,6 +75,7 @@ public class CreditServiceImpl implements CreditService {
     public Map<String ,String> queryCredit(Long sid){//loglarda info sms bilgisi
 
         Customer customer = customerService.getCustomer(sid);
+        log.info(customer.toString());
         Long customerSalary = customer.getSalary();
         Integer customerCreditScore = customer.getCreditScore();
         Map<String, String> creditInfoMap = new HashMap<>();
@@ -80,6 +86,7 @@ public class CreditServiceImpl implements CreditService {
 
             addCredit(new Credit(sid,"RED",0));
             credit = getCredit(sid);
+            log.info(credit.toString());
             creditInfoMap.put("message",credit.getCreditResult());
             creditInfoMap.put("creditLimit",credit.getCreditLimit().toString());
             return creditInfoMap;
@@ -88,6 +95,7 @@ public class CreditServiceImpl implements CreditService {
 
             addCredit(new Credit(sid,"ONAY",10000));
             credit = getCredit(sid);
+            log.info(credit.toString());
             creditInfoMap.put("message",credit.getCreditResult());
             creditInfoMap.put("creditLimit",credit.getCreditLimit().toString());
             return creditInfoMap;
@@ -96,6 +104,7 @@ public class CreditServiceImpl implements CreditService {
 
             addCredit(new Credit(sid,"ONAY",20000));
             credit = getCredit(sid);
+            log.info(credit.toString());
             creditInfoMap.put("message",credit.getCreditResult());
             creditInfoMap.put("creditLimit",credit.getCreditLimit().toString());
             return creditInfoMap;
@@ -105,6 +114,7 @@ public class CreditServiceImpl implements CreditService {
             Integer creditLimit = (int) (customerSalary * CREDIT_LIMIT_MULTIPLIER);
             addCredit(new Credit(sid,"ONAY", creditLimit));
             credit = getCredit(sid);
+            log.info(credit.toString());
             creditInfoMap.put("message", credit.getCreditResult());
             creditInfoMap.put("creditLimit", credit.getCreditLimit().toString());
             return creditInfoMap;

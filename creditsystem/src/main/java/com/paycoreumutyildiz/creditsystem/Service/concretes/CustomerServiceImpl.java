@@ -8,6 +8,7 @@ import com.paycoreumutyildiz.creditsystem.Repository.CustomerRepository;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditScoreService;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -46,6 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
         try{
             customer.setCreditScore(creditScoreService.getRandomCreditScore());
             customerRepository.save(customer);
+            log.info("Success adding customer" + customer);
         }catch (Exception exception){
             throw new UniquePhoneNumberException(customer.getPhoneNumber());
         }
@@ -60,6 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override //Delete Customer with Credit if exists
     public boolean deleteCustomer(Long sid) {
         Optional<Customer> customer = Optional.of(getCustomer(sid));
+        log.info(customer.get().toString());
         if(customer.isPresent()){
             Optional<Credit> credit;
             try{
@@ -67,7 +71,8 @@ public class CustomerServiceImpl implements CustomerService {
                 if(credit.isPresent()){
                     creditService.deleteCredit(sid);
                 }
-            }catch(NotFoundException e){//log
+            }catch(NotFoundException e){
+                log.info("Customer does not have any request for credit");
                  }
 
             customerRepository.delete(customer.get());
