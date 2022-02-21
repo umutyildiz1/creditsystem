@@ -73,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService {
                 }
             }catch(NotFoundException e){
                 log.info("Customer does not have any request for credit");
-                 }
+            }
 
             customerRepository.delete(customer.get());
             return true;
