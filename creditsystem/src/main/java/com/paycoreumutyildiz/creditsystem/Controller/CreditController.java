@@ -1,7 +1,6 @@
 package com.paycoreumutyildiz.creditsystem.Controller;
 
 import com.paycoreumutyildiz.creditsystem.Model.Credit;
-import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

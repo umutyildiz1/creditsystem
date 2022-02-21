@@ -5,12 +5,10 @@ import com.paycoreumutyildiz.creditsystem.Exceptions.NotFoundException;
 import com.paycoreumutyildiz.creditsystem.Model.Credit;
 import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Repository.CreditRepository;
-import com.paycoreumutyildiz.creditsystem.Repository.CustomerRepository;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
