@@ -61,66 +61,57 @@ public class CreditServiceImpl implements CreditService {
     public boolean deleteCredit(Long sid) {
         Optional<Credit> credit = Optional.of(getCredit(sid));
         log.info(credit.get().toString());
-        if(credit.isPresent()){
-            creditRepository.delete(credit.get());
-            return true;
-        }
-        return false;
+        creditRepository.delete(credit.get());
+        return true;
     }
 
     //credit business function for defining and saving customer credit limit and response
     @Override
-    public Map<String ,String> queryCredit(Long sid){//loglarda info sms bilgisi
+    public Map<String ,String> queryCredit(Long sid){
 
         Customer customer = customerService.getCustomer(sid);
         log.info(customer.toString());
+
         Long customerSalary = customer.getSalary();
         Integer customerCreditScore = customer.getCreditScore();
-        Map<String, String> creditInfoMap = new HashMap<>();
+
         final Integer CREDIT_LIMIT_MULTIPLIER = 4;
-        Credit credit;
+
 
         if (customerCreditScore < 500){
 
-            addCredit(new Credit(sid,"RED",0));
-            credit = getCredit(sid);
-            log.info(credit.toString());
-            creditInfoMap.put("message",credit.getCreditResult());
-            creditInfoMap.put("creditLimit",credit.getCreditLimit().toString());
-            return creditInfoMap;
+            return saveCreditQueryAndReturn(sid,"RED",0,customer.getPhoneNumber());
 
         }else if (customerCreditScore >= 500 && customerCreditScore < 1000 && customerSalary < 5000){
 
-            addCredit(new Credit(sid,"ONAY",10000));
-            credit = getCredit(sid);
-            log.info(credit.toString());
-            creditInfoMap.put("message",credit.getCreditResult());
-            creditInfoMap.put("creditLimit",credit.getCreditLimit().toString());
-            return creditInfoMap;
+            return saveCreditQueryAndReturn(sid,"ONAY",10000, customer.getPhoneNumber());
 
         }else if (customerCreditScore >= 500 && customerCreditScore < 1000 && customerSalary >= 5000){
 
-            addCredit(new Credit(sid,"ONAY",20000));
-            credit = getCredit(sid);
-            log.info(credit.toString());
-            creditInfoMap.put("message",credit.getCreditResult());
-            creditInfoMap.put("creditLimit",credit.getCreditLimit().toString());
-            return creditInfoMap;
+            return saveCreditQueryAndReturn(sid,"ONAY",20000, customer.getPhoneNumber());
 
         }else if (customerCreditScore >= 1000){
 
             Integer creditLimit = (int) (customerSalary * CREDIT_LIMIT_MULTIPLIER);
-            addCredit(new Credit(sid,"ONAY", creditLimit));
-            credit = getCredit(sid);
-            log.info(credit.toString());
-            creditInfoMap.put("message", credit.getCreditResult());
-            creditInfoMap.put("creditLimit", credit.getCreditLimit().toString());
-            return creditInfoMap;
+
+            return saveCreditQueryAndReturn(sid,"ONAY",creditLimit,customer.getPhoneNumber());
 
         }
 
         throw new CreditQueryException(sid.toString());
     }
 
+    private Map<String,String> saveCreditQueryAndReturn(Long sid,String creditResult,Integer creditLimit,String phoneNumber){
+        Map<String,String> creditInfoMap = new HashMap<>();
+        Credit credit;
+
+        addCredit(new Credit(sid,creditResult,creditLimit));
+        credit = getCredit(sid);
+        log.info(credit.toString());
+        creditInfoMap.put("message",credit.getCreditResult());
+        creditInfoMap.put("creditLimit",credit.getCreditLimit().toString());
+        log.info(phoneNumber + " numaralı telefona sms gönderildi.");
+        return creditInfoMap;
+    }
 
 }
