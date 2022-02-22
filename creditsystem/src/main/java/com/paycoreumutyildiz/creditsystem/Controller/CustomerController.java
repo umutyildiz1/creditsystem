@@ -37,7 +37,7 @@ public class CustomerController {
     }
 
     @PutMapping("update")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+    public ResponseEntity<Customer> updateCustomer(@RequestBody @Valid Customer customer){
         return ResponseEntity.ok(customerService.updateCustomer(customer));
     }
 

@@ -112,8 +112,11 @@ class CustomerServiceImplTest {
     void updateCustomer() {
         Customer expectedCustomer = new Customer
                 (1L,"Customer","Customer", 5000L,"12345678912",450,null);
+        Customer inDb = new Customer
+                (1L,"Customer","Customer", 5000L,"12345678912",450,null);
 
         when(customerRepository.save(expectedCustomer)).thenReturn(expectedCustomer);
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(inDb));
 
         Customer actualCustomer = customerService.updateCustomer(expectedCustomer);
         assertEquals(expectedCustomer,actualCustomer);

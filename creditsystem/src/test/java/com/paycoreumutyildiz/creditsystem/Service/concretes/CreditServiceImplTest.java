@@ -90,10 +90,12 @@ class CreditServiceImplTest {
     }
 
     @Test
-    void updateCredit() {//customer not found exception ekle hem test hem koda hemde customera
+    void updateCredit() {
         Credit expectedCredit = new Credit(1L,"RED",0);
+        Credit inDb = new Credit(1L,"ONAY",10000);
 
         when(creditRepository.save(expectedCredit)).thenReturn(expectedCredit);
+        when(creditRepository.findById(1L)).thenReturn(Optional.of(inDb));
 
         Credit actualCredit = creditService.updateCredit(expectedCredit);
         assertEquals(expectedCredit,actualCredit);
@@ -133,7 +135,7 @@ class CreditServiceImplTest {
         when(customerService.getCustomer(1L)).thenReturn(customer);
         when(creditRepository.findById(1L)).thenReturn(Optional.of(credit));
 
-        Map actual = creditService.queryCredit(1L);
+        Map<String, String> actual = creditService.queryCredit(1L);
         verify(creditRepository,times(1)).save(credit);
         assertEquals(expected.get("message"),actual.get("message"));
         assertEquals(expected.get("creditLimit"),actual.get("creditLimit"));
@@ -151,7 +153,7 @@ class CreditServiceImplTest {
         when(customerService.getCustomer(1L)).thenReturn(customer);
         when(creditRepository.findById(1L)).thenReturn(Optional.of(credit));
 
-        Map actual = creditService.queryCredit(1L);
+        Map<String, String> actual = creditService.queryCredit(1L);
         verify(creditRepository,times(1)).save(credit);
         assertEquals(expected.get("message"),actual.get("message"));
         assertEquals(expected.get("creditLimit"),actual.get("creditLimit"));
@@ -169,7 +171,7 @@ class CreditServiceImplTest {
         when(customerService.getCustomer(1L)).thenReturn(customer);
         when(creditRepository.findById(1L)).thenReturn(Optional.of(credit));
 
-        Map actual = creditService.queryCredit(1L);
+        Map<String, String> actual = creditService.queryCredit(1L);
         verify(creditRepository,times(1)).save(credit);
         assertEquals(expected.get("message"),actual.get("message"));
         assertEquals(expected.get("creditLimit"),actual.get("creditLimit"));
@@ -187,7 +189,7 @@ class CreditServiceImplTest {
         when(customerService.getCustomer(1L)).thenReturn(customer);
         when(creditRepository.findById(1L)).thenReturn(Optional.of(credit));
 
-        Map actual = creditService.queryCredit(1L);
+        Map<String, String> actual = creditService.queryCredit(1L);
         verify(creditRepository,times(1)).save(credit);
         assertEquals(expected.get("message"),actual.get("message"));
         assertEquals(expected.get("creditLimit"),actual.get("creditLimit"));

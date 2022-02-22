@@ -57,6 +57,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(Customer customer) {
+        getCustomer(customer.getSid());
+        log.info("Update success");
         return customerRepository.save(customer);
     }
 

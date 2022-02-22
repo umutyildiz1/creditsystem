@@ -53,6 +53,7 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit updateCredit(Credit credit) {
+        getCredit(credit.getSid());
         log.info("Success update");
         return creditRepository.save(credit);
     }
