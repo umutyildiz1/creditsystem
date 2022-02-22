@@ -7,7 +7,6 @@ import com.paycoreumutyildiz.creditsystem.Model.Customer;
 import com.paycoreumutyildiz.creditsystem.Repository.CustomerRepository;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditScoreService;
 import com.paycoreumutyildiz.creditsystem.Service.abstracts.CreditService;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -79,7 +78,7 @@ class CustomerServiceImplTest {
     }
 
     @Test
-    void addCustomer_Success() {//CreditScoreServisi inject edip tekrar yaz //exception ayrı test
+    void addCustomer_Success() {
         Customer expectedCustomer = new Customer
                 (1L,"Customer","Customer", 5000L,"12345678912",450,null);
         Customer actualCustomer = new Customer
@@ -145,6 +144,7 @@ class CustomerServiceImplTest {
 
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         when(creditService.getCredit(1L)).thenReturn(credit);
+        when(creditService.deleteCredit(1L)).thenReturn(true);
 
         Boolean actualResult = customerService.deleteCustomer(1L);
         assertEquals(expectedResult,actualResult);
@@ -154,14 +154,10 @@ class CustomerServiceImplTest {
 
     @Test
     void deleteCustomer_NotFoundException(){
-        Customer customer = new Customer
-                (1L,"Customer","Customer", 5000L,"12345678912",450,null);
 
         when(customerRepository.findById(1L)).thenThrow(NotFoundException.class);
 
-        assertThrows(NotFoundException.class, () -> {
-            customerService.deleteCustomer(1L);
-        });
+        assertThrows(NotFoundException.class, () -> customerService.deleteCustomer(1L));
 
 
     }
