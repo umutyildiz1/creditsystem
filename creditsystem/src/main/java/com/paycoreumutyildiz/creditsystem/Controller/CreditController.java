@@ -38,7 +38,7 @@ public class CreditController {
     }
 
     @PutMapping("update")
-    public ResponseEntity<Credit> updateCredit(@RequestBody Credit credit){
+    public ResponseEntity<Credit> updateCredit(@RequestBody @Valid Credit credit){
         return ResponseEntity.ok(creditService.updateCredit(credit));
     }
 
