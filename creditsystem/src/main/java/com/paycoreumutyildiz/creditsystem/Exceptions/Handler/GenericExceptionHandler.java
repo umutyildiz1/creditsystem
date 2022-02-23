@@ -1,6 +1,7 @@
 package com.paycoreumutyildiz.creditsystem.Exceptions.Handler;
 
 import com.paycoreumutyildiz.creditsystem.Exceptions.CreditQueryException;
+import com.paycoreumutyildiz.creditsystem.Exceptions.CustomJwtException;
 import com.paycoreumutyildiz.creditsystem.Exceptions.NotFoundException;
 import com.paycoreumutyildiz.creditsystem.Exceptions.UniquePhoneNumberException;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,13 @@ public class GenericExceptionHandler {
         Map<String,String> exceptionResponse = new HashMap<>();
         exceptionResponse.put("message",creditQueryException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
+    }
+
+    @ExceptionHandler(CustomJwtException.class)
+    public ResponseEntity<Map> handleException(CustomJwtException exception){
+        Map<String, String> exceptionResponse = new HashMap<>();
+        exceptionResponse.put("message", exception.getMessage());
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(exceptionResponse);
     }
 
     @ExceptionHandler(Exception.class)

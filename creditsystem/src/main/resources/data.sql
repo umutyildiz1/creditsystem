@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS Customer CASCADE;
 DROP TABLE IF EXISTS Credit CASCADE;
+DROP TABLE IF EXISTS security_user CASCADE;
 
 -- TABLE CREATION
 
@@ -16,6 +17,12 @@ CREATE TABLE Credit(
     sid BIGINT PRIMARY KEY,
     credit_result VARCHAR(50),
     credit_limit INT
+);
+
+CREATE TABLE security_user(
+    sid BIGINT PRIMARY KEY,
+    username VARCHAR(25),
+    password VARCHAR(255)
 );
 
 -- FOREIGN KEY CONSTRAINTS
