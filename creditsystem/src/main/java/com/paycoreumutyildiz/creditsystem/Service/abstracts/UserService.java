@@ -13,4 +13,5 @@ public interface UserService {
     User search(String username);
     User whoami(HttpServletRequest req);
     String refresh(String username);
+    User getUser(Long sid);
 }
