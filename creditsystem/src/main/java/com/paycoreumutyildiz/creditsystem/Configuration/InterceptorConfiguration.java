@@ -21,7 +21,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(customerInterceptor).addPathPatterns("/api/customer/*");
-        registry.addInterceptor(creditInterceptor).addPathPatterns("/api/credit/*");
+        registry.addInterceptor(customerInterceptor).addPathPatterns("/api/customers/*");
+        registry.addInterceptor(creditInterceptor).addPathPatterns("/api/credits/*");
     }
 }
