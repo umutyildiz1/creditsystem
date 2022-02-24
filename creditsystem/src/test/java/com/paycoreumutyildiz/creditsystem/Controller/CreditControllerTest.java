@@ -58,7 +58,7 @@ class CreditControllerTest {
 
         when(creditService.getAllCredits()).thenReturn(expectedCredits);
 
-        MockHttpServletResponse response = mockMvc.perform(get("/api/credit/all")
+        MockHttpServletResponse response = mockMvc.perform(get("/api/credits/all")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print()).andReturn().getResponse();
 
@@ -76,7 +76,7 @@ class CreditControllerTest {
 
         when(creditService.getCredit(1L)).thenReturn(expected);
 
-        MockHttpServletResponse response = mockMvc.perform(get("/api/credit/1")
+        MockHttpServletResponse response = mockMvc.perform(get("/api/credits/1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print()).andReturn().getResponse();
 
@@ -94,7 +94,7 @@ class CreditControllerTest {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String jsonCredit = ow.writeValueAsString(credit);
 
-        MockHttpServletResponse response = mockMvc.perform(post("/api/credit/create")
+        MockHttpServletResponse response = mockMvc.perform(post("/api/credits/create")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonCredit)).andDo(print()).andReturn().getResponse();
@@ -112,7 +112,7 @@ class CreditControllerTest {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String jsonCredit = ow.writeValueAsString(credit);
 
-        MockHttpServletResponse response = mockMvc.perform(put("/api/credit/update")
+        MockHttpServletResponse response = mockMvc.perform(put("/api/credits/update")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonCredit)).andDo(print()).andReturn().getResponse();
@@ -126,7 +126,7 @@ class CreditControllerTest {
         Boolean expected = true;
         when(creditService.deleteCredit(1L)).thenReturn(expected);
 
-        MockHttpServletResponse response = mockMvc.perform(delete("/api/credit/delete?sid=1")
+        MockHttpServletResponse response = mockMvc.perform(delete("/api/credits/delete?sid=1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print()).andReturn().getResponse();
 
@@ -144,7 +144,7 @@ class CreditControllerTest {
         when(creditService.queryCredit(1L)).thenReturn(expected);
 
 
-        MockHttpServletResponse response = mockMvc.perform(get("/api/credit/query?sid=1")
+        MockHttpServletResponse response = mockMvc.perform(get("/api/credits/query?sid=1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print()).andReturn().getResponse();
 

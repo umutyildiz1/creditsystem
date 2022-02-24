@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -79,6 +80,15 @@ public class UserServiceImpl implements UserService {
 
     public String refresh(String username) {
         return jwtTokenProvider.createToken(username);
+    }
+
+    @Override
+    public User getUser(Long sid) {
+        Optional<User> user = Optional.ofNullable(userRepository.findBySid(sid));
+        if(user.isPresent()){
+            return user.get();
+        }
+        return new User();
     }
 
 }

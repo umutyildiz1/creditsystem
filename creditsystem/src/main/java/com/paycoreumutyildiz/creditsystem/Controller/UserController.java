@@ -24,6 +24,10 @@ public class UserController {
         return userService.signin(user.getUsername(), user.getPassword());
     }
 
+    @GetMapping("get/{sid}")
+    public User getUser(@PathVariable Long sid){
+        return userService.getUser(sid);
+    }
     @PostMapping("/signup")
     public String signup(@RequestBody @Valid User user) {
         return userService.signup(user);

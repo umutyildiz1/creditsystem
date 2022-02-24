@@ -58,7 +58,7 @@ class CustomerControllerTest {
 
         when(customerService.getAllCustomers()).thenReturn(expectedCustomers);
 
-        MockHttpServletResponse response = mockMvc.perform(get("/api/customer/all")
+        MockHttpServletResponse response = mockMvc.perform(get("/api/customers/all")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print()).andReturn().getResponse();
 
@@ -77,7 +77,7 @@ class CustomerControllerTest {
 
         when(customerService.getCustomer(1L)).thenReturn(expected);
 
-        MockHttpServletResponse response = mockMvc.perform(get("/api/customer/1")
+        MockHttpServletResponse response = mockMvc.perform(get("/api/customers/1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print()).andReturn().getResponse();
 
@@ -95,7 +95,7 @@ class CustomerControllerTest {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String jsonCredit = ow.writeValueAsString(expected);
 
-        MockHttpServletResponse response = mockMvc.perform(post("/api/customer/create")
+        MockHttpServletResponse response = mockMvc.perform(post("/api/customers/create")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonCredit)).andDo(print()).andReturn().getResponse();
@@ -113,7 +113,7 @@ class CustomerControllerTest {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String jsonCredit = ow.writeValueAsString(expected);
 
-        MockHttpServletResponse response = mockMvc.perform(put("/api/customer/update")
+        MockHttpServletResponse response = mockMvc.perform(put("/api/customers/update")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonCredit)).andDo(print()).andReturn().getResponse();
@@ -127,7 +127,7 @@ class CustomerControllerTest {
         Boolean expected = true;
         when(customerService.deleteCustomer(1L)).thenReturn(expected);
 
-        MockHttpServletResponse response = mockMvc.perform(delete("/api/customer/delete?sid=1")
+        MockHttpServletResponse response = mockMvc.perform(delete("/api/customers/delete?sid=1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print()).andReturn().getResponse();
 
