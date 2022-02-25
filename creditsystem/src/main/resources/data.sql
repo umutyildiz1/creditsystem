@@ -33,9 +33,9 @@ ADD CONSTRAINT fk_credit_customer FOREIGN KEY(sid) REFERENCES Customer(sid) ON D
 -- FAKE DATA INSERTION
 
 INSERT INTO Customer(sid, customer_name, surname, salary, phone_number,credit_score)
-VALUES (11111111111,'Ali','Yılmaz',2500,11111111111,450),
-       (22222222222,'Veli','Yıldız',2500,22222222222,500),
-       (33333333333,'Ayşe','Öz',5000,33333333333,500),
-       (44444444444,'Fatma','Özdemir',7500,44444444444,500),
-       (55555555555,'Nergis','Yağcı',7500,55555555555,1001);
+VALUES (11111111111,'Ali','Yılmaz',2500,10101010512,450),
+       (22222222222,'Veli','Yıldız',2500,14578632152,500),
+       (33333333333,'Ayşe','Öz',5000,14788745214,500),
+       (44444444444,'Fatma','Özdemir',7500,47474563251,500),
+       (55555555555,'Nergis','Yağcı',7500,98975426541,1001);
 
