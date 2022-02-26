@@ -17,6 +17,15 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "Tests"
+          command: mvnw test
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -24,3 +33,4 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - test
