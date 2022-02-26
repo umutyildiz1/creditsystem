@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/umutyildiz1/creditsystem/tree/main.svg?style=svg)](https://circleci.com/gh/umutyildiz1/creditsystem/tree/main)
 # creditsystem
 Credit System Application for Paycore using Spring Boot
 
