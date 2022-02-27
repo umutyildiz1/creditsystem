@@ -44,4 +44,4 @@ https://github.com/umutyildiz1/credit-system-ui
 * Postgres : Open-source database
 * JWT: It provides for project that project endpoints are secured
 * Swagger : Endpoint and entity documentation
-* JUnit and Mockito : They provides faster implementation of unit tests to developer
+* JUnit and Mockito : They provide faster implementation of unit tests for developer
