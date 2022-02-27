@@ -31,6 +31,10 @@ https://github.com/umutyildiz1/credit-system-ui
 * Build as Docker image : docker build -t creditsystem-app:v1 .
 * Run Docker image : docker run --name credit-system -p 8080:8080 creditsystem-app:v1
 
+## Swagger Endpoints
+* http://localhost:8080/swagger-ui/index.html#/
+* http://localhost:8080/v3/api-docs
+
 # Information about the project
 
 ## Used Technologies & Arhitecture & Methods:
