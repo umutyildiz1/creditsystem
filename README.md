@@ -39,6 +39,7 @@ https://github.com/umutyildiz1/credit-system-ui
 
 ## Used Technologies & Arhitecture & Methods:
 * N-Layered Architecture : More useful for starting phase of a project than Microservice architecture
+* Java 8 : interface default keyword used in app 
 * Spring Boot 
 * Spring Security : It enables to easier configuration for authentication and authorization
 * Postgres : Open-source database
