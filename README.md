@@ -27,7 +27,7 @@ https://github.com/umutyildiz1/credit-system-ui
 * Package app : maven package
 
 ### For Docker Image
-* Please change the postgres port from pom.xml
+* Please change the postgres port from application.properties
 * Build as Docker image : docker build -t creditsystem-app:v1 .
 * Run Docker image : docker run --name credit-system -p 8080:8080 creditsystem-app:v1
 
