@@ -1,6 +1,7 @@
 [![CircleCI](https://circleci.com/gh/umutyildiz1/creditsystem/tree/main.svg?style=svg&circle-token=0dde66f2fab619d576d4e541e25c91d011ad7c8f)](https://circleci.com/gh/umutyildiz1/creditsystem/tree/main)
 # creditsystem
 Credit System Application for Paycore using Spring Boot
+* Info : Credit Score Service generates a random number for Customer credit score
 
 # Front End Application 
 Please take a look front end repo 
